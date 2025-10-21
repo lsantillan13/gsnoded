@@ -9,7 +9,11 @@ const productSchema = new Schema({
     category: { type: String, required: true },
     fatherCategory: { type: String, required: true },
     brand: { type: String, required: false },
-    stock: { type: Number, required: false }
+    stock: { type: Number, required: false },
+    sku: { type: String, required: false, unique: true },
+    createdAt: { type: Date, default: Date.now },
+    productStatus: { type: Boolean, default: true},
+    labelType: { type: [String], required: false }
 }, {
     timestamps: true,
     versionKey: false
