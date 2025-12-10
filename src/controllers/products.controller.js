@@ -1,16 +1,17 @@
 import Product from '../models/Product.js';
 
 export const createProduct = async (req, res) => {
-    const { name, description, imageUrl, images, category, fatherCategory, brand, productStatus } = req.body;
+    const { name, description, imageUrl, images, category, brand, productStatus } = req.body;
 
     const newProduct = new Product({
         name,
         description,
+        subcategory,
         imageUrl,
         images,
         category,
-        fatherCategory,
         brand,
+        isNew: false,
         createdAt: new Date(), 
         productStatus,
         labelType: req.body.labelType || []
