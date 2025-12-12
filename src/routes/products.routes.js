@@ -4,14 +4,16 @@ const router = Router();
 
 import { authJwt } from '../middlewares/index.js';
 
-router.post('/', [authJwt.verifyToken, authJwt.isModerator], productCtrl.createProduct ); // Assuming you want to protect this route
-
+// Rutas principales de productos
+router.post('/', [authJwt.verifyToken, authJwt.isModerator], productCtrl.createProduct);
 router.get('/', productCtrl.getProducts);
-
 router.get('/:id', productCtrl.getProduct);
-
 router.put('/:id', [authJwt.verifyToken, authJwt.isAdmin], productCtrl.updateProduct);
-
 router.delete('/:id', [authJwt.verifyToken, authJwt.isAdmin], productCtrl.deleteProduct);
+
+// Rutas específicas para secciones destacadas
+router.get('/section/:sectionSlug', productCtrl.getProductsBySection);
+router.get('/featured/sections', productCtrl.getHomepageSections);
+router.patch('/:id/featured/:sectionSlug', [authJwt.verifyToken, authJwt.isAdmin], productCtrl.toggleFeaturedSection);
 
 export default router;
